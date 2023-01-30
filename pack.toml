@@ -2,3 +2,8 @@
 type = "local"
 path = "."
 ipkg = "ansi.ipkg"
+
+[custom.all.prettier-ansi]
+type = "local"
+path = "prettier"
+ipkg = "prettier-ansi.ipkg"
