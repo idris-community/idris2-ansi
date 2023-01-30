@@ -26,5 +26,6 @@ decorateImpl s (sx :< x) = Element (go [] sx :< (x ++ reset)) %search
 ||| changing its stats like width or height.
 export
 decorateLayout : List SGR -> Layout -> Layout
+decorateLayout [] l = l
 decorateLayout xs (MkLayout content stats) =
   layout (decorateImpl (escapeSGR xs) content) stats
