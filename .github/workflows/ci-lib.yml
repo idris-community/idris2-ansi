@@ -29,3 +29,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build lib
+        run: pack typecheck ansi
