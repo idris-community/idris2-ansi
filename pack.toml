@@ -1,0 +1,4 @@
+[custom.all.ansi]
+type = "local"
+path = "."
+ipkg = "ansi.ipkg"

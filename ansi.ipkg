@@ -1,0 +1,14 @@
+package ansi
+
+authors    = "stefan-hoeck"
+brief      = "ANSI terminal escape sequences"
+version    = 0.1.0
+readme     = "README.md"
+license    = "BSD-3 Clause"
+
+sourcedir  = "src"
+depends    = base    >= 0.6.0
+
+modules = Text.ANSI
+        , Text.ANSI.CSI
+        , Text.ANSI.SGR
