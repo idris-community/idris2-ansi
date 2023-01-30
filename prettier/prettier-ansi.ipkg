@@ -1,0 +1,14 @@
+package prettier-ansi
+
+authors    = "stefan-hoeck"
+brief      = "Colored terminal output for the Bernardy-style pretty printer"
+version    = 0.1.0
+readme     = "README.md"
+license    = "BSD-3 Clause"
+
+sourcedir  = "src"
+depends    = ansi
+           , prettier
+
+modules = Text.PrettyPrint.Bernardy.ANSI
+        , Text.PrettyPrint.Bernardy.Core.ANSI

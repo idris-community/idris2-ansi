@@ -28,5 +28,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Build lib
+      - name: Build ansi
         run: pack typecheck ansi
+      - name: Build prettier-ansi
+        run: pack typecheck prettier-ansi
