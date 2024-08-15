@@ -16,6 +16,10 @@ Show DecoratedString where
   show dstr = escapeSGR dstr.sgr ++ dstr.str ++ escapeSGR [Reset]
 
 export
+fromString : String -> DecoratedString
+fromString = MkDString []
+
+export
 colored : Color -> String -> DecoratedString
 colored c = MkDString [SetForeground c]
 
