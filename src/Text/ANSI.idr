@@ -20,21 +20,25 @@ fromString : String -> DecoratedString
 fromString = MkDString []
 
 export
-colored : Color -> String -> DecoratedString
-colored c = MkDString [SetForeground c]
+addSGR : SGR -> DecoratedString -> DecoratedString
+addSGR sgr (MkDString sgrs str) = MkDString (sgr :: sgrs) str
 
 export
-background : Color -> String -> DecoratedString
-background c = MkDString [SetBackground c]
+colored : Color -> DecoratedString -> DecoratedString
+colored c = addSGR $ SetForeground c
 
 export
-bolden : String -> DecoratedString
-bolden = MkDString [SetStyle Bold]
+background : Color -> DecoratedString -> DecoratedString
+background c = addSGR $ SetBackground c
 
 export
-italicize : String -> DecoratedString
-italicize = MkDString [SetStyle Italic]
+bolden : DecoratedString -> DecoratedString
+bolden = addSGR $ SetStyle Bold
 
 export
-underline : String -> DecoratedString
-underline = MkDString [SetStyle SingleUnderline]
+italicize : DecoratedString -> DecoratedString
+italicize = addSGR $ SetStyle Italic
+
+export
+underline : DecoratedString -> DecoratedString
+underline = addSGR $ SetStyle SingleUnderline
