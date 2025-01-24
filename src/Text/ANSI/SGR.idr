@@ -6,8 +6,22 @@ import Data.List
 
 public export
 data Color
-  = Black | Red | Green | Yellow | Blue | Magenta | Cyan | White
-  | BrightBlack | BrightRed | BrightGreen | BrightYellow | BrightBlue | BrightMagenta | BrightCyan | BrightWhite
+  = Black
+  | Red
+  | Green
+  | Yellow
+  | Blue
+  | Magenta
+  | Cyan
+  | White
+  | BrightBlack
+  | BrightRed
+  | BrightGreen
+  | BrightYellow
+  | BrightBlue
+  | BrightMagenta
+  | BrightCyan
+  | BrightWhite
 
 Cast Color String where
   cast Black = "0"
@@ -29,9 +43,15 @@ Cast Color String where
 
 public export
 data Style
-  = Bold | Faint | NotBoldOrFaint | Italic
-  | SingleUnderline | DoubleUnderline | NoUnderline
-  | Striked | NotStriked
+  = Bold
+  | Faint
+  | NotBoldOrFaint
+  | Italic
+  | SingleUnderline
+  | DoubleUnderline
+  | NoUnderline
+  | Striked
+  | NotStriked
 
 Cast Style String where
   cast Bold = "1"
@@ -59,11 +79,12 @@ data SGR
   | SetBackground Color
   | SetStyle Style
   | SetBlink Blink
+  | SetReversed Bool
 
 ||| Returns the ANSI escape code equivalent to the list of operations provided.
 export
 escapeSGR : List SGR -> String
-escapeSGR xs = "\x1B[" ++ concat (intersperse ";" (toCode <$> xs)) ++ "m"
+escapeSGR xs = "\x1B[\{params}m"
   where
     toCode : SGR -> String
     toCode Reset = "0"
@@ -71,3 +92,8 @@ escapeSGR xs = "\x1B[" ++ concat (intersperse ";" (toCode <$> xs)) ++ "m"
     toCode (SetBackground c) = "48;5;" ++ cast c
     toCode (SetStyle s) = cast s
     toCode (SetBlink b) = cast b
+    toCode (SetReversed True) = "7"
+    toCode (SetReversed False) = "27"
+
+    params : String
+    params = fastConcat $ intersperse ";" $ toCode <$> xs
