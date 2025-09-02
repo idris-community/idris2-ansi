@@ -51,6 +51,7 @@ data Style
   | Faint
   | NotBoldOrFaint
   | Italic
+  | NotItalic
   | SingleUnderline
   | DoubleUnderline
   | NoUnderline
@@ -62,6 +63,7 @@ Cast Style String where
   cast Faint = "2"
   cast NotBoldOrFaint = "22"
   cast Italic = "3"
+  cast NotItalic = "23"
   cast SingleUnderline = "4"
   cast DoubleUnderline = "21"
   cast NoUnderline = "24"
