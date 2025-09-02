@@ -58,6 +58,14 @@ data Style
   | Striked
   | NotStriked
 
+public export %inline
+Dimmed : Style
+Dimmed = Faint
+
+public export %inline
+NormalIntensity : Style
+NormalIntensity = NotBoldOrFaint
+
 Cast Style String where
   cast Bold = "1"
   cast Faint = "2"
