@@ -103,3 +103,21 @@ scrollDown n = "\x1B[" ++ show n ++ "T"
 export
 scrollDown1 : String
 scrollDown1 = scrollDown 1
+
+||| Saves cursor position of the terminal (rewriting the old one, if present).
+||| This is a non-standard, but widely supported command.
+export
+saveCursorPos : String
+saveCursorPos = "\x1B[s"
+
+||| Restore most recently saved cursor position.
+||| This is a non-standard, but widely supported command.
+export
+restoreCursorPos : String
+restoreCursorPos = "\x1B[u"
+
+||| Shows or hides the cursor, depending on its argument
+||| This is a non-standard, but widely supported command.
+export
+showCursor : Bool -> String
+showCursor b = "\x1B[?25" ++ if b then "h" else "l"

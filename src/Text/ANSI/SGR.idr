@@ -22,6 +22,8 @@ data Color
   | BrightMagenta
   | BrightCyan
   | BrightWhite
+  | Color256 Bits8
+  | RGB Bits8 Bits8 Bits8
 
 Cast Color String where
   cast Black = "0"
@@ -40,6 +42,8 @@ Cast Color String where
   cast BrightMagenta = "13"
   cast BrightCyan = "14"
   cast BrightWhite = "15"
+  cast (Color256 c) = show c
+  cast (RGB r g b) = "\{show r};\{show g};\{show b}"
 
 public export
 data Style
@@ -47,17 +51,27 @@ data Style
   | Faint
   | NotBoldOrFaint
   | Italic
+  | NotItalic
   | SingleUnderline
   | DoubleUnderline
   | NoUnderline
   | Striked
   | NotStriked
 
+public export %inline
+Dimmed : Style
+Dimmed = Faint
+
+public export %inline
+NormalIntensity : Style
+NormalIntensity = NotBoldOrFaint
+
 Cast Style String where
   cast Bold = "1"
   cast Faint = "2"
   cast NotBoldOrFaint = "22"
   cast Italic = "3"
+  cast NotItalic = "23"
   cast SingleUnderline = "4"
   cast DoubleUnderline = "21"
   cast NoUnderline = "24"
@@ -88,6 +102,8 @@ escapeSGR xs = "\x1B[\{params}m"
   where
     toCode : SGR -> String
     toCode Reset = "0"
+    toCode (SetForeground c@(RGB {})) = "38;2;" ++ cast c
+    toCode (SetBackground c@(RGB {})) = "48;2;" ++ cast c
     toCode (SetForeground c) = "38;5;" ++ cast c
     toCode (SetBackground c) = "48;5;" ++ cast c
     toCode (SetStyle s) = cast s
